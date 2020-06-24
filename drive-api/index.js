@@ -54,7 +54,8 @@ const uploadFile = async (fileObject) => {
         const file = response.data;
         return { src: `https://drive.google.com/uc?export=view&id=${file.id}`, name: file.name, type: file.mimeType };
     } catch (err) {
-        return err;
+        console.log(err.message)
+        return { error: { message: err.message } };
     }
 }
 

@@ -8,10 +8,15 @@ router.get('/', async (req, res) => {
     res.json(data)
 });
 
-router.post('/upload', upload.single('file'), async (req, res) => {
-    const fileObject = req.file;
-    const data = await uploadFile(fileObject)
-    res.json(data)
+router.post('/upload', (req, res) => {
+    upload.single('file')(req, res, async (err) => {
+        if (err) {
+            return res.json({ error: { message: err.message } })
+        }
+        const fileObject = req.file;
+        const data = await uploadFile(fileObject)
+        return res.json(data)
+    })
 });
 
 
