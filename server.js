@@ -8,7 +8,9 @@ const app = express();
 app.use(logger("dev"));
 app.use(bodyParser.json()); // get information from html forms
 app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use('/', require('./routes/images'));
+app.use('/token', require('./routes/token'));
 
 // Start the server
 const port = app.get("port") || 5000;
